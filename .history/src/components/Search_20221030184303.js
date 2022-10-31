@@ -3,18 +3,7 @@ import axios from "axios";
 
 const Search = () => {
     const [term, setTerm] = useState('wikipedia');
-    const [debouncedTerm, setDebauncedTerm] = useState(term);
-    const [results, setResults] = useState([]);
-
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            setDebauncedTerm(term);
-        }, 1000);
-
-        return () => {
-            clearTimeout(timerId);
-        };
-    }, [term])
+    const [results, setResults] = useState([])
 
     useEffect(() => {
         const search = async () => {
@@ -24,15 +13,29 @@ const Search = () => {
                     list: 'search',
                     origin: '*',
                     format: 'json',
-                    srsearch: debouncedTerm,
+                    srsearch: term,
 
                 }
             })
 
             setResults(data.query.search);
         };
-        search();
-    }, [debouncedTerm]);
+
+        if (term && !results.length) {
+            search();
+        } else {
+            const timeoutId = setTimeout(() => {
+                if(term) {
+                    search();
+                }
+            }, 1000);
+    
+            return () => {
+                clearTimeout(timeoutId)
+            };
+        };
+
+    },[term, results.length]);
 
     const renderedResults = results.map((result) => {
         return (

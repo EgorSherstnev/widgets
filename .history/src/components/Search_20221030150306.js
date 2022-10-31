@@ -2,37 +2,37 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Search = () => {
-    const [term, setTerm] = useState('wikipedia');
-    const [debouncedTerm, setDebauncedTerm] = useState(term);
-    const [results, setResults] = useState([]);
+    const [term, setTerm] = useState('');
+    const [results, setResults] = useState([])
 
     useEffect(() => {
-        const timerId = setTimeout(() => {
-            setDebauncedTerm(term);
-        }, 1000);
+        console.log('Initial render or term was changed');
 
         return () => {
-            clearTimeout(timerId);
+            console.log('Cleanup');
         };
-    }, [term])
 
-    useEffect(() => {
-        const search = async () => {
+        /*const search = async () => {
             const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
                 params: {
                     action: 'query',
                     list: 'search',
                     origin: '*',
                     format: 'json',
-                    srsearch: debouncedTerm,
+                    srsearch: term,
 
                 }
             })
 
             setResults(data.query.search);
         };
-        search();
-    }, [debouncedTerm]);
+
+        const timeoutId = setTimeout(() => {
+            if(term) {
+                search();
+            }
+        }, 500);*/
+    },[term]);
 
     const renderedResults = results.map((result) => {
         return (
