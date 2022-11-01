@@ -40,7 +40,6 @@ export default () => {
         <div>
             <Dropdown 
                 selected={selected} 
-                onSelectedChange={setSelected}
                 options={options}
             />
         </div>
