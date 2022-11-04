@@ -8,9 +8,6 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
     document.body.addEventListener(
       "click",
       (event) => {
-        if (ref.current.contains(event.target)) {
-            return;
-        }
         setOpen(false);
       },
       { capture: true }
@@ -32,6 +29,8 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
             </div>
         );
     });
+    
+    console.log(ref.current);
 
     return (
         <div ref={ref} className="ui form">
