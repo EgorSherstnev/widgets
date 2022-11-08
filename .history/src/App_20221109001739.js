@@ -76,7 +76,7 @@ export default () => {
                 <Dropdown 
                     label='Select a color'
                     options={options}
-                    selected={selected} 
+                    selected={select} 
                     onSelectedChange={setSelected}
                 />
             </Route>

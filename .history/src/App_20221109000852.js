@@ -50,7 +50,10 @@ const showList = () => {
 const showDropdown = () => {
     if (window.location.pathname === '/dropdown') {
         return <Dropdown 
-            
+            /*options={options}  
+            selected={selected} 
+            onSelectedChange={onSelectedChange} 
+            label={label} */
         />;
     }
 }
@@ -62,8 +65,6 @@ const showTranslate = () => {
 }
 
 export default () => {
-    const [selected,setSelected] = useState(options[0]);
-
     return (
         <div>
             <Route path='/'>
@@ -73,12 +74,7 @@ export default () => {
                 <Search />
             </Route>
             <Route path='/dropdown'>
-                <Dropdown 
-                    label='Select a color'
-                    options={options}
-                    selected={selected} 
-                    onSelectedChange={setSelected}
-                />
+                <Dropdown />
             </Route>
             <Route path='/translate'>
                 <Translate />
